@@ -85,6 +85,8 @@ class OBOReader:
                 rec._parents.append(after_colon(line).split()[0])
             elif line.startswith("is_obsolete:") and after_colon(line)=="true":
                 rec.is_obsolete = True
+            elif line.startswith("def"):
+                rec.definition = after_colon(line)
 
         return rec
 
@@ -104,6 +106,7 @@ class GOTerm:
         self.level = -1          # distance from root node
         self.is_obsolete = False # is_obsolete
         self.alt_ids = []        # alternative identifiers
+        self.definition = ""     # definition of the term
 
     def __str__(self):
         obsolete = "obsolete" if self.is_obsolete else ""
